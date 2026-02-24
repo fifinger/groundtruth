@@ -220,12 +220,11 @@ a:hover {
 /* Large Ground Truth logo overlaid on the hero image */
 .gt-hero-logo-overlay {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 16px;
+  left: 16px;
   z-index: 3;
-  width: 60%;
-  max-width: 200px;
+  width: 40%;
+  max-width: 160px;
   pointer-events: none;
   filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 60px rgba(0, 0, 0, 0.4));
 }
