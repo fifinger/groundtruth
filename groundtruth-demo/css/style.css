@@ -602,16 +602,17 @@ a:hover {
 
 /* Ground Truth Column Banner */
 .gt-column-banner {
-  background: linear-gradient(to right, #6C3AED, #3B82F6, #22D3EE);
+  background: linear-gradient(to right, #3b82f6, #6366f1, #38bdf8);
   color: #FFFFFF;
   padding: 18px 24px;
-  border-radius: 12px;
+  border-radius: 10px;
   margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
   font-family: system-ui, sans-serif;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2);
 }
 
 .gt-column-banner-left {
