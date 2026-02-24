@@ -602,27 +602,27 @@ a:hover {
 
 /* Ground Truth Column Banner */
 .gt-column-banner {
-  background: #466882;
+  background: linear-gradient(to right, #6C3AED, #3B82F6, #22D3EE);
   color: #FFFFFF;
   padding: 18px 24px;
-  border-radius: 8px;
+  border-radius: 12px;
   margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 24px;
+  font-family: system-ui, sans-serif;
 }
 
 .gt-column-banner-left {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 6px;
 }
 
-.gt-column-banner-title {
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+.gt-column-banner-logo-title {
+  height: 28px;
+  width: auto;
 }
 
 .gt-column-banner-subtitle {
