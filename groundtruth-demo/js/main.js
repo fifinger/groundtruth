@@ -1,6 +1,6 @@
 /* ============================================================
    Ground Truth Demo - Main JavaScript
-   Handles: splash screen, overlay positioning
+   Handles: splash screen, overlay positioning, fallback messages
    ============================================================ */
 
 (function () {
@@ -27,13 +27,9 @@
   }
 
   // --- Dynamic overlay positioning ---
-  // If the screenshot image loads, we can read its natural dimensions
-  // and fine-tune the overlay position.
-  var screenshotBg = document.getElementById('screenshotBg');
   var gtOverlay = document.getElementById('gtOverlay');
 
-  if (screenshotBg && gtOverlay) {
-    // Add a subtle hover effect feedback
+  if (gtOverlay) {
     gtOverlay.addEventListener('mouseenter', function () {
       this.style.boxShadow = '0 0 0 3px rgba(59, 139, 186, 0.4)';
     });
@@ -43,15 +39,18 @@
   }
 
   // --- Handle missing screenshots gracefully ---
-  var screenshots = document.querySelectorAll('.screenshot-bg, .screenshot-bg-bottom');
+  var screenshots = document.querySelectorAll('.screenshot-bg-header, .screenshot-bg, .screenshot-bg-bottom');
   screenshots.forEach(function (img) {
     img.addEventListener('error', function () {
-      // If the screenshot doesn't load, show a helpful message
       var parent = this.parentElement;
+      // If parent is an <a> tag, go up one more level
+      if (parent.tagName === 'A') {
+        parent = parent.parentElement;
+      }
       if (parent && !parent.querySelector('.screenshot-fallback')) {
         var fallback = document.createElement('div');
         fallback.className = 'screenshot-fallback';
-        fallback.style.cssText = 'padding: 60px 40px; text-align: center; background: #f5f5f5; color: #999; font-size: 14px; line-height: 1.6;';
+        fallback.style.cssText = 'padding: 40px 40px; text-align: center; background: #f5f5f5; color: #999; font-size: 14px; line-height: 1.6;';
         fallback.innerHTML = '<p style="margin-bottom: 8px; font-weight: 600; color: #666;">Screenshot not found</p>' +
           '<p>Save the ERPEC News homepage screenshot to:<br>' +
           '<code style="background: #e8e8e8; padding: 2px 8px; border-radius: 3px; font-size: 13px;">' +

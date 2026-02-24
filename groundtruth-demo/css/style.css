@@ -121,9 +121,36 @@ a:hover {
 }
 
 /* ============================================================
-   SCREENSHOT HERO SECTION
-   The ERPEC screenshot sits as a full-width image.
-   Our GT content overlay is positioned on top.
+   SCREENSHOT HEADER
+   The ERPEC nav bar, inserted as a full-width screenshot.
+   ============================================================ */
+.screenshot-header {
+  line-height: 0;
+  background: #4a90b8;
+}
+
+.screenshot-header a {
+  display: block;
+  line-height: 0;
+}
+
+.screenshot-bg-header {
+  width: 100%;
+  display: block;
+}
+
+/* Sticky header on article page */
+.screenshot-header--sticky {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   SCREENSHOT HERO SECTION (Carousel / 3-story block)
+   The ERPEC carousel screenshot sits as a full-width image.
+   Our GT content overlay is positioned over the center panel.
    ============================================================ */
 .screenshot-hero {
   position: relative;
@@ -139,18 +166,18 @@ a:hover {
 }
 
 /* --- Ground Truth Hero Overlay ---
-   Positioned over the CENTER carousel panel of the screenshot.
-   Adjust these values (top, left, width, height) to align
-   precisely with the center panel in your screenshot.
-   Values are percentages of the screenshot image dimensions.
+   Positioned over the CENTER (Jet) panel of the 3-story carousel.
+   The carousel has 3 equal-width panels side by side.
+   Adjust top/height if the screenshot includes elements
+   above or below the panels.
    ----------------------------------------------------------- */
 .gt-hero-overlay {
   position: absolute;
-  /* Position over center carousel panel */
-  top: 5.5%;
-  left: 33.2%;
-  width: 33.5%;
-  height: 62.5%;
+  /* Center panel of 3-column carousel */
+  top: 0;
+  left: 33.33%;
+  width: 33.34%;
+  height: 100%;
   display: block;
   overflow: hidden;
   text-decoration: none;
