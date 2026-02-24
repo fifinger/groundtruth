@@ -633,13 +633,14 @@ a:hover {
 
 .gt-column-banner-right {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
   flex-shrink: 0;
 }
 
 .gt-column-banner-right span {
-  font-size: 11px;
+  font-size: 10px;
   opacity: 0.7;
   white-space: nowrap;
 }
