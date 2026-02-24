@@ -178,26 +178,38 @@ a:hover {
   left: 33.33%;
   width: 33.34%;
   height: 100%;
-  display: block;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
   text-decoration: none;
-  color: #FFFFFF;
+  color: #333333;
   cursor: pointer;
   z-index: 2;
+  background: #FFFFFF;
 }
 
 .gt-hero-overlay:hover {
   text-decoration: none;
-  color: #FFFFFF;
+  color: #333333;
 }
 
-/* Background image fills the overlay */
+/* "GROUND TRUTH" badge at top */
+.gt-hero-badge {
+  background: #00374B;
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Hero image in the middle of the panel */
 .gt-hero-image {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
   background-size: cover;
   background-position: center;
   transition: transform 0.6s ease;
@@ -209,48 +221,22 @@ a:hover {
 
 /* Dark gradient from bottom for text readability */
 .gt-hero-gradient {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 70%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.35) 50%, rgba(0, 0, 0, 0) 100%);
-  z-index: 1;
+  display: none;
 }
 
-/* "GROUND TRUTH" badge, top-left of the panel */
-.gt-hero-badge {
-  position: absolute;
-  top: 16px;
-  left: 16px;
-  background: rgba(0, 55, 75, 0.8);
-  color: #FFFFFF;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 5px 12px;
-  border-radius: 3px;
-  z-index: 3;
-  backdrop-filter: blur(3px);
-}
-
-/* Headline + date at the bottom of the panel */
+/* Headline + date below the image */
 .gt-hero-content {
-  position: absolute;
-  bottom: 28px;
-  left: 24px;
-  right: 24px;
-  z-index: 3;
+  padding: 12px 16px 8px;
+  flex-shrink: 0;
+  background: #FFFFFF;
 }
 
 .gt-hero-headline {
-  font-size: clamp(20px, 2.2vw, 36px);
+  font-size: clamp(14px, 1.6vw, 22px);
   font-weight: 700;
-  line-height: 1.15;
-  color: #FFFFFF;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  margin-bottom: 12px;
+  line-height: 1.25;
+  color: #1a1a1a;
+  margin-bottom: 6px;
 }
 
 .gt-hero-date {
@@ -258,10 +244,22 @@ a:hover {
 }
 
 .gt-hero-date span {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.9);
-  padding-bottom: 6px;
-  border-bottom: 3px solid #3B8BBA;
+  font-size: 13px;
+  color: #666666;
+}
+
+/* SECU-TECH logo at bottom of overlay panel */
+.gt-hero-logo {
+  flex-shrink: 0;
+  padding: 6px 16px 10px;
+  background: #FFFFFF;
+  text-align: right;
+}
+
+.gt-hero-logo img {
+  height: 18px;
+  width: auto;
+  opacity: 0.55;
 }
 
 /* ============================================================
