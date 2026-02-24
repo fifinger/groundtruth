@@ -600,6 +600,23 @@ a:hover {
   color: #cccccc;
 }
 
+/* Ground Truth Column Banner */
+.gt-column-banner {
+  background: #466882;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 14px 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.gt-column-banner-sep {
+  margin: 0 6px;
+  opacity: 0.5;
+}
+
 /* Article Hero Image */
 .article-hero {
   width: 100%;
