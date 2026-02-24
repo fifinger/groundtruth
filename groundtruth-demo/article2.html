@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Sensor to Shutdown in 200 Milliseconds - Ground Truth | erpecnews LIVE!</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ERPEC Header (screenshot, same as homepage) -->
+  <div class="screenshot-header screenshot-header--sticky">
+    <a href="index.html">
+      <img src="images/erpec-header.png" alt="erpecnews LIVE!" class="screenshot-bg-header">
+    </a>
+  </div>
+
+  <!-- Article Content -->
+  <main class="article-page">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="index.html">Ground Truth</a>
+      <span class="separator">/</span>
+      <span>Edition 2</span>
+    </div>
+
+    <!-- Hero Image -->
+    <img class="article-hero" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=1200&h=600&fit=crop&q=80" alt="Industrial sensor technology">
+    <p class="article-hero-caption">Image: Modern overfill protection relies on a precisely engineered signal chain from sensor to shutdown.</p>
+
+    <!-- Edition Label -->
+    <div class="article-edition-label">Ground Truth | Edition 2 | Technical Explainer</div>
+
+    <!-- Headline -->
+    <h1 class="article-headline">From Sensor to Shutdown in 200 Milliseconds: How Wireless Overfill Protection Actually Works</h1>
+
+    <!-- Meta -->
+    <div class="article-meta">
+      <div class="author-avatar">MS</div>
+      <div class="author-info">
+        <div class="author-name">Ing. Manfred Schwarz</div>
+        <div class="author-title">Technical Director, SECU-TECH</div>
+      </div>
+      <div class="article-date">March 10, 2026</div>
+    </div>
+
+    <!-- Article Body -->
+    <div class="article-body">
+      <p>Most fleet operators and terminal managers interact with overfill protection systems at the interface level: a green light means go, a red light means stop, and if something triggers, the transfer shuts down. But between the moment a level sensor detects a critical fill state and the moment a control valve actually closes, a precisely engineered chain of events must execute correctly, every time, in sequence, within a very narrow time window.</p>
+
+      <p>Understanding this chain is not academic. It is the difference between knowing your system is installed and knowing your system will work when it matters.</p>
+
+      <h2>The trigger: what the sensor sees</h2>
+
+      <p>Overfill protection begins with a level-sensing element inside the tank compartment. In the most common configuration for road tankers, this is a float-type sensor conforming to EN 13616. The float sits at a predetermined height inside the compartment, corresponding to the maximum safe fill level. As the liquid surface rises during loading, the float lifts. When it reaches the trigger point, it changes the state of an electrical circuit.</p>
+
+      <p>There are several sensing principles in use. Mechanical float switches physically break or make a contact. Optical sensors detect the presence of liquid at the sensor tip by measuring changes in light refraction. Capacitive sensors measure changes in the dielectric constant as liquid surrounds the probe. Each principle has different characteristics in terms of response speed, susceptibility to fouling, and behaviour across different product densities.</p>
+
+      <div class="ground-truth-callout">
+        <strong>Ground truth:</strong> The critical parameter at this stage is response time. The sensor must detect the fill level and change its output state fast enough that the downstream system has time to act before the liquid reaches the actual overflow point. The distance between the sensor's trigger level and the physical overflow point is the safety margin, and it is measured in centimetres and seconds.
+      </div>
+
+      <h2>The signal path: getting from sensor to controller</h2>
+
+      <p>In a cable-based system, the sensor's state change travels through a hardwired connection to the control unit. The signal is straightforward: a change in impedance, a contact closure, or an analogue current shift. The control unit monitors this signal continuously and responds when it crosses a threshold.</p>
+
+      <p>In a wireless system, the signal path is more complex and introduces additional engineering challenges. The sensor's state change must be converted into a radio signal, transmitted across the air gap between the tank and the control unit, received, decoded, and validated, all within milliseconds and all within an environment that may be classified as an EX zone (explosive atmosphere).</p>
+
+      <p>Wireless transmission in EX zones requires intrinsically safe (IS) design. This means the radio transmitter on the tank side must be engineered so that even under fault conditions (short circuit, component failure), the energy it can release is insufficient to ignite a flammable gas or vapour mixture. This constraint limits the available transmission power, which in turn affects range and reliability. Modern systems operating in the 433 MHz band achieve reliable transmission over the distances required for tanker operations (typically 10 to 50 metres) while remaining within IS energy limits.</p>
+
+      <p>The radio link also introduces the question of signal integrity. In a wired system, if the cable is intact, the signal arrives. In a wireless system, the control unit must distinguish between three states: sensor OK (normal fill level), sensor triggered (overfill condition), and signal lost (communication failure). The third state is critical. If the radio link drops, the system must fail safe, meaning it must treat loss of signal as an alarm condition, not as "everything is fine."</p>
+
+      <div class="ground-truth-callout">
+        <strong>Ground truth:</strong> This fail-safe behaviour is what separates a safety-rated wireless system from a convenience wireless system. A wireless garage door opener can tolerate a missed signal. A wireless overfill protection system cannot.
+      </div>
+
+      <h2>The decision: what the controller does</h2>
+
+      <p>The control unit receives the sensor signal (wired or wireless) and makes a binary decision: continue or stop. But the decision logic is more nuanced than a simple on/off threshold.</p>
+
+      <p>First, the controller validates the signal. Is this a genuine sensor trigger, or is it noise? Debounce logic filters out transient spikes that could cause false shutdowns. The debounce window must be short enough to not delay a genuine alarm but long enough to reject electrical noise. Typical debounce times are in the range of 10 to 50 milliseconds.</p>
+
+      <p>Second, the controller checks the system state. Is the transfer actually in progress? Are all other safety conditions still met (earthing connected, vapour recovery confirmed, dead-man active)? In integrated systems that combine overfill protection with product identification and earthing monitoring, the shutdown decision considers multiple inputs simultaneously.</p>
+
+      <p>Third, the controller issues the shutdown command. This is an output signal sent to the actuator (typically a solenoid-operated valve or a pump control relay) that physically stops the flow of product.</p>
+
+      <h2>The action: stopping the flow</h2>
+
+      <p>The shutdown command must translate into physical action: a valve closing, a pump stopping, or both. The actuator's response time adds to the total chain delay. A solenoid valve closing under spring return typically achieves full closure in 50 to 150 milliseconds depending on valve size and the pressure differential across it. A pump shutdown initiated via relay may take longer if the pump has significant rotational inertia.</p>
+
+      <p>During the actuator response time, product continues to flow. This is the overrun volume: the quantity of liquid that enters the tank between the moment the sensor triggers and the moment flow actually stops. Overrun volume depends on the flow rate at the time of trigger, the total system response time (sensor + signal path + controller + actuator), and any hydraulic effects in the pipeline (water hammer, pressure decay).</p>
+
+      <div class="ground-truth-callout">
+        <strong>Ground truth:</strong> For a typical bottom-loading operation at 2,400 litres per minute, a total system response time of 200 milliseconds results in an overrun of approximately 8 litres. At 3,600 litres per minute (high-flow loading), the same response time produces approximately 12 litres of overrun. This is why the safety margin between the sensor trigger point and the physical overflow point must account for the worst-case overrun at the maximum expected flow rate.
+      </div>
+
+      <h2>Why this matters operationally</h2>
+
+      <p>The entire chain, from sensor trigger to flow stop, must execute correctly every single time. Not most of the time. Every time. A 99.9% reliability rate sounds impressive until you consider that a fleet making 500 deliveries per month will experience a failure approximately every two months at that rate.</p>
+
+      <p>This is why overfill protection systems are designed with redundancy, fail-safe defaults, and testable architectures. And it is why periodic verification of the complete chain (not just the sensor, not just the valve, but the complete path from trigger to shutdown) is essential. Testing the sensor in isolation tells you the sensor works. It does not tell you the system works.</p>
+
+      <!-- Author sign-off -->
+      <p class="author-signoff">Ing. Manfred Schwarz is the Technical Director at SECU-TECH. Christian Stranzinger is the series editor of Ground Truth.</p>
+    </div>
+
+    <!-- Attribution Block -->
+    <div class="attribution-block">
+      <p><strong>GROUND TRUTH</strong> is a biweekly editorial series on safety and compliance in fuel logistics, contributed by domain specialists at SECU-TECH in the interest of advancing industry best practices.</p>
+      <div class="attribution-footer">
+        <svg class="secu-logo-dark" viewBox="0 0 260 40" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="30" font-family="Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="700" fill="#2A6496" letter-spacing="3">SECU-TECH</text>
+        </svg>
+        <a href="https://secu-tech.at" class="attribution-url" target="_blank" rel="noopener">secu-tech.at</a>
+      </div>
+    </div>
+
+    <!-- Related Editions -->
+    <section class="related-editions">
+      <div class="section-header">
+        <h2>More from Ground Truth</h2>
+        <a href="index.html" class="view-link">View all editions &gt;</a>
+      </div>
+      <div class="related-grid">
+        <div class="gt-card">
+          <a href="article.html">
+            <img class="gt-card-image" src="https://images.unsplash.com/photo-1586953208270-767889db8383?w=600&h=300&fit=crop&q=75" alt="Fuel tanker">
+            <div class="gt-card-body">
+              <h3>Five Assumptions Fleet Operators Make About Overfill Protection That Don't Hold Up in Practice</h3>
+              <div class="gt-card-date">02/24/26</div>
+              <p class="gt-card-teaser">Float valve drift, multi-product density differences, and sensor fouling are just the beginning.</p>
+            </div>
+          </a>
+        </div>
+        <div class="gt-card">
+          <a href="article3.html">
+            <img class="gt-card-image" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=600&h=300&fit=crop&q=75" alt="Fleet inspection">
+            <div class="gt-card-body">
+              <h3>The Audit That Changed a Fleet: When Independent Testing Revealed What Routine Inspections Missed</h3>
+              <div class="gt-card-date">03/24/26</div>
+              <p class="gt-card-teaser">A mid-sized European fleet discovered that 12% of their overfill valves failed under conditions that standard inspections never tested for.</p>
+            </div>
+          </a>
+        </div>
+        <div class="gt-card">
+          <a href="article.html">
+            <img class="gt-card-image" src="https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=600&h=300&fit=crop&q=75" alt="European flags">
+            <div class="gt-card-body">
+              <h3>National Implementation Tracker: How EU Safety Directives Are Interpreted Differently</h3>
+              <div class="gt-card-date">04/07/26</div>
+              <p class="gt-card-teaser">A practical guide to cross-border compliance for fleet operators.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Newsletter CTA -->
+  <section class="newsletter-cta">
+    <div class="container">
+      <h2>Stay Informed</h2>
+      <p>Subscribe to the ERPEC News weekly newsletter for the latest industry insights.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="button">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Fuel Retailing</h4>
+          <a href="#">Industry News</a>
+          <a href="#">Europe</a>
+          <a href="#">AMEA</a>
+          <a href="#">Americas</a>
+          <a href="#">Fuels</a>
+        </div>
+        <div class="footer-col">
+          <h4>Sectors</h4>
+          <a href="#">Shop Retailing</a>
+          <a href="#">Car Wash</a>
+          <a href="#">Technology IT &amp; Data</a>
+          <a href="#">Vehicle Manufacturing</a>
+          <a href="#">Upstream &amp; Oil Refining</a>
+        </div>
+        <div class="footer-col">
+          <h4>Media</h4>
+          <a href="#">TV &amp; Videos</a>
+          <a href="#">Latest Features</a>
+          <a href="#">Supplier &amp; Product News</a>
+          <a href="#">Newsletter Archive</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About ERPEC News</a>
+          <a href="#">Editorial Team</a>
+          <a href="#">Advertise With Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Published by McLean Events, Conferences &amp; Media Ltd.</span>
+        <span>&copy; 2026 erpecnews LIVE!</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Audit That Changed a Fleet - Ground Truth | erpecnews LIVE!</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ERPEC Header (screenshot, same as homepage) -->
+  <div class="screenshot-header screenshot-header--sticky">
+    <a href="index.html">
+      <img src="images/erpec-header.png" alt="erpecnews LIVE!" class="screenshot-bg-header">
+    </a>
+  </div>
+
+  <!-- Article Content -->
+  <main class="article-page">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a href="index.html">Home</a>
+      <span class="separator">/</span>
+      <a href="index.html">Ground Truth</a>
+      <span class="separator">/</span>
+      <span>Edition 3</span>
+    </div>
+
+    <!-- Hero Image -->
+    <img class="article-hero" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=1200&h=600&fit=crop&q=80" alt="Fleet inspection and maintenance">
+    <p class="article-hero-caption">Image: Independent functional testing goes beyond standard inspection protocols to reveal real-world performance gaps.</p>
+
+    <!-- Edition Label -->
+    <div class="article-edition-label">Ground Truth | Edition 3 | Field Report</div>
+
+    <!-- Headline -->
+    <h1 class="article-headline">The Audit That Changed a Fleet: When Independent Testing Revealed What Routine Inspections Missed</h1>
+
+    <!-- Meta -->
+    <div class="article-meta">
+      <div class="author-avatar">GT</div>
+      <div class="author-info">
+        <div class="author-name">Ground Truth Editorial Team</div>
+        <div class="author-title">Series Editor: Christian Stranzinger, SECU-TECH</div>
+      </div>
+      <div class="article-date">March 24, 2026</div>
+    </div>
+
+    <!-- Article Body -->
+    <div class="article-body">
+      <p><em>This field report is based on a real operational audit conducted at a European fuel distribution fleet. Company names, locations, and identifying details have been changed at the request of the parties involved. The technical findings are reported accurately.</em></p>
+
+      <h2>Background</h2>
+
+      <p>The fleet in question operates 74 tank vehicles across three countries, delivering petroleum products from six depots to approximately 400 forecourts. The fleet has an above-average safety record. No major spill incidents in the past decade. All vehicles are inspected on the regulatory schedule. All overfill protection systems were certified at installation and re-certified at each periodic inspection.</p>
+
+      <p>In late 2025, new management initiated a comprehensive safety review as part of a broader operational audit. Rather than relying on the standard periodic inspection (which tests overfill systems under a defined protocol), the fleet commissioned an independent engineering firm to conduct functional testing under real-world operating conditions.</p>
+
+      <div class="ground-truth-callout">
+        <strong>Ground truth:</strong> The difference between a standard inspection and an independent functional test is significant. A standard inspection verifies that the system meets its specification under controlled conditions. An independent functional test asks a different question: does the system perform reliably under the actual conditions the fleet encounters in daily operations?
+      </div>
+
+      <h2>What the audit tested</h2>
+
+      <p>The independent team tested three things on each vehicle:</p>
+
+      <p><strong>Sensor trigger accuracy.</strong> Does the overfill sensor trigger at the correct fill level, not just with the calibration product, but with the actual products the vehicle regularly carries? For multi-product vehicles, this meant testing trigger behaviour with each product type.</p>
+
+      <p><strong>System response time.</strong> From sensor trigger to valve closure, how long does the complete chain take under loaded conditions (with pumps running at operational flow rates, not the reduced flow rates sometimes used during inspection)?</p>
+
+      <p><strong>Signal integrity under operational stress.</strong> For wireless systems: does the radio link maintain reliable communication when the vehicle is positioned in typical loading bay configurations (close to metal structures, other vehicles, and electrical equipment that may create interference)?</p>
+
+      <h2>What the audit found</h2>
+
+      <p>Of the 74 vehicles tested, 65 passed all three criteria within acceptable margins. Nine vehicles (12.2%) showed performance issues that would not have been detected during a standard periodic inspection.</p>
+
+      <h2>Sensor drift in multi-product vehicles</h2>
+
+      <p>Four vehicles showed measurable sensor trigger drift when tested with different products. The sensors had been calibrated with standard diesel (density approximately 0.835 kg/l). When tested with winter-grade diesel (lower density) and biodiesel B10 blend (higher density), the trigger point shifted by 1.5 to 3.8 centimetres. In two cases, this shift was sufficient to reduce the safety margin between trigger point and physical overflow to below the margin required to accommodate overrun volume at the maximum loading flow rate.</p>
+
+      <p>These four vehicles had passed their most recent periodic inspection. The inspection tested sensor function with a single product at a controlled flow rate. It did not test across the product range the vehicle actually carries.</p>
+
+      <h2>Response time degradation</h2>
+
+      <p>Three vehicles showed system response times that had increased since installation. The cause in all three cases was valve actuator degradation: the spring-return mechanism in the shutdown valve had weakened over time, resulting in slower closure. Total system response time had increased from the designed 180 milliseconds to between 280 and 340 milliseconds.</p>
+
+      <p>At the fleet's standard loading flow rate (2,800 litres per minute), the additional 100 to 160 milliseconds of response time translated to an additional 4.7 to 7.5 litres of overrun volume. This did not push the system outside its total safety margin in normal conditions, but it reduced the margin significantly, and under high-flow conditions (which occasionally occur), the margin would have been insufficient.</p>
+
+      <p>These three vehicles had also passed their periodic inspections. The inspections verified valve closure but did not measure closure speed against the original specification.</p>
+
+      <h2>Wireless signal degradation</h2>
+
+      <p>Two vehicles equipped with wireless overfill protection showed intermittent signal quality issues when positioned in specific loading bay configurations. The issue was traced to a combination of factors: antenna positioning on the vehicle (partially obstructed by a subsequently installed equipment bracket), proximity to a newly installed metal walkway structure at one depot, and a degraded antenna connection at the control unit (corrosion at the connector).</p>
+
+      <p>None of these conditions existed at installation. They developed incrementally over two to three years of normal operations. The standard inspection protocol does not include a signal quality measurement under varying environmental conditions.</p>
+
+      <h2>What the fleet did</h2>
+
+      <p>The fleet's response was methodical and, importantly, systemic rather than vehicle-specific.</p>
+
+      <p>The nine affected vehicles were taken out of service and remediated. Sensors were recalibrated for multi-product operation. Valve actuators were replaced. Antenna connections were cleaned and repositioned.</p>
+
+      <p>But the larger change was to the fleet's maintenance and testing protocol. The fleet introduced quarterly functional spot-checks on a rotating sample of vehicles (approximately 20% of the fleet per quarter, meaning every vehicle is independently tested at least once per year). These spot-checks test across the actual product range, at operational flow rates, and include signal quality assessment for wireless systems.</p>
+
+      <p>The fleet also established a correlation between vehicle age, product mix, and the probability of performance drift, which now drives a risk-based inspection schedule rather than a purely calendar-based one. Vehicles carrying wider product ranges and vehicles older than 48 months receive more frequent testing.</p>
+
+      <h2>The lesson</h2>
+
+      <p>The fleet's existing inspection regime was compliant. It met every regulatory requirement. And it missed 12% of the vehicles that had degraded below the designed performance envelope.</p>
+
+      <p>This is not a criticism of the regulatory inspection protocol. That protocol is designed to verify baseline system function. It is a recognition that baseline verification and operational assurance are two different things, and that the gap between them grows over time as vehicles age, products change, and operating environments evolve.</p>
+
+      <div class="ground-truth-callout">
+        <strong>Ground truth:</strong> "We were testing whether the systems were present. We were not testing whether the systems were adequate for what we actually ask them to do."
+      </div>
+
+      <!-- Author sign-off -->
+      <p class="author-signoff">This field report was compiled by the Ground Truth editorial team based on documentation and interviews provided under condition of anonymity. Christian Stranzinger is the series editor of Ground Truth.</p>
+    </div>
+
+    <!-- Attribution Block -->
+    <div class="attribution-block">
+      <p><strong>GROUND TRUTH</strong> is a biweekly editorial series on safety and compliance in fuel logistics, contributed by domain specialists at SECU-TECH in the interest of advancing industry best practices.</p>
+      <div class="attribution-footer">
+        <svg class="secu-logo-dark" viewBox="0 0 260 40" xmlns="http://www.w3.org/2000/svg">
+          <text x="0" y="30" font-family="Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="700" fill="#2A6496" letter-spacing="3">SECU-TECH</text>
+        </svg>
+        <a href="https://secu-tech.at" class="attribution-url" target="_blank" rel="noopener">secu-tech.at</a>
+      </div>
+    </div>
+
+    <!-- Related Editions -->
+    <section class="related-editions">
+      <div class="section-header">
+        <h2>More from Ground Truth</h2>
+        <a href="index.html" class="view-link">View all editions &gt;</a>
+      </div>
+      <div class="related-grid">
+        <div class="gt-card">
+          <a href="article.html">
+            <img class="gt-card-image" src="https://images.unsplash.com/photo-1586953208270-767889db8383?w=600&h=300&fit=crop&q=75" alt="Fuel tanker">
+            <div class="gt-card-body">
+              <h3>Five Assumptions Fleet Operators Make About Overfill Protection That Don't Hold Up in Practice</h3>
+              <div class="gt-card-date">02/24/26</div>
+              <p class="gt-card-teaser">Float valve drift, multi-product density differences, and sensor fouling are just the beginning.</p>
+            </div>
+          </a>
+        </div>
+        <div class="gt-card">
+          <a href="article2.html">
+            <img class="gt-card-image" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=600&h=300&fit=crop&q=75" alt="Industrial sensor technology">
+            <div class="gt-card-body">
+              <h3>From Sensor to Shutdown in 200 Milliseconds: How Wireless Overfill Protection Actually Works</h3>
+              <div class="gt-card-date">03/10/26</div>
+              <p class="gt-card-teaser">The complete signal chain explained, from the moment a float triggers to the moment a valve closes.</p>
+            </div>
+          </a>
+        </div>
+        <div class="gt-card">
+          <a href="article.html">
+            <img class="gt-card-image" src="https://images.unsplash.com/photo-1494412574643-ff11b0a5eb19?w=600&h=300&fit=crop&q=75" alt="European flags">
+            <div class="gt-card-body">
+              <h3>National Implementation Tracker: How EU Safety Directives Are Interpreted Differently</h3>
+              <div class="gt-card-date">04/07/26</div>
+              <p class="gt-card-teaser">A practical guide to cross-border compliance for fleet operators.</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Newsletter CTA -->
+  <section class="newsletter-cta">
+    <div class="container">
+      <h2>Stay Informed</h2>
+      <p>Subscribe to the ERPEC News weekly newsletter for the latest industry insights.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Enter your email address">
+        <button type="button">Subscribe</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>Fuel Retailing</h4>
+          <a href="#">Industry News</a>
+          <a href="#">Europe</a>
+          <a href="#">AMEA</a>
+          <a href="#">Americas</a>
+          <a href="#">Fuels</a>
+        </div>
+        <div class="footer-col">
+          <h4>Sectors</h4>
+          <a href="#">Shop Retailing</a>
+          <a href="#">Car Wash</a>
+          <a href="#">Technology IT &amp; Data</a>
+          <a href="#">Vehicle Manufacturing</a>
+          <a href="#">Upstream &amp; Oil Refining</a>
+        </div>
+        <div class="footer-col">
+          <h4>Media</h4>
+          <a href="#">TV &amp; Videos</a>
+          <a href="#">Latest Features</a>
+          <a href="#">Supplier &amp; Product News</a>
+          <a href="#">Newsletter Archive</a>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About ERPEC News</a>
+          <a href="#">Editorial Team</a>
+          <a href="#">Advertise With Us</a>
+          <a href="#">Contact</a>
+          <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Published by McLean Events, Conferences &amp; Media Ltd.</span>
+        <span>&copy; 2026 erpecnews LIVE!</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
