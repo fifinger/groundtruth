@@ -741,6 +741,11 @@ a:hover {
   margin-top: 16px;
 }
 
+.attribution-logo {
+  height: 28px;
+  width: auto;
+}
+
 .attribution-block .secu-logo-dark {
   height: 22px;
   width: auto;
