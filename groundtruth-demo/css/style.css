@@ -220,23 +220,20 @@ a:hover {
 /* Large Ground Truth logo overlaid on the hero image */
 .gt-hero-logo-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 60%;
+  max-width: 200px;
   pointer-events: none;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.15) 60%, transparent 80%);
+  filter: drop-shadow(0 2px 20px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 60px rgba(0, 0, 0, 0.4));
 }
 
 .gt-hero-logo-svg {
-  width: 75%;
-  max-width: 220px;
+  display: block;
+  width: 100%;
   height: auto;
-  filter: drop-shadow(0 2px 16px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 48px rgba(0, 0, 0, 0.35));
 }
 
 /* Dark gradient from bottom for text readability */
