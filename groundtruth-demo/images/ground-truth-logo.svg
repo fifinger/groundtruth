@@ -1,3 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 40" fill="none">
-  <text x="0" y="30" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="32" font-weight="700" letter-spacing="1" fill="#FFFFFF">GROUND TRUTH</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 120" width="480" height="120">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;700&amp;display=swap');
+    </style>
+  </defs>
+  
+  <!-- GROUND -->
+  <text x="16" y="62" 
+        font-family="Inter, 'Helvetica Neue', Arial, sans-serif" 
+        font-weight="300" 
+        font-size="48" 
+        letter-spacing="6" 
+        fill="#FFFFFF" 
+        text-transform="uppercase">GROUND</text>
+  
+  <!-- TRUTH -->
+  <text x="16" y="108" 
+        font-family="Inter, 'Helvetica Neue', Arial, sans-serif" 
+        font-weight="700" 
+        font-size="48" 
+        letter-spacing="6" 
+        fill="#FFFFFF" 
+        text-transform="uppercase">TRUTH</text>
+  
+  <!-- Subtle accent line between the two words -->
+  <rect x="16" y="72" width="56" height="3" fill="#FFFFFF" opacity="0.6" rx="1.5"/>
 </svg>
