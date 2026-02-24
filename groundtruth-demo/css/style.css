@@ -1,0 +1,954 @@
+/* ============================================================
+   GROUND TRUTH DEMO - Screenshot Overlay Approach
+   Uses actual ERPEC homepage screenshot as background,
+   with Ground Truth content overlaid at integration points.
+   ============================================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, 'Segoe UI', sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #333333;
+  background: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: #2A6496;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: #1D4B73;
+}
+
+/* --- Container --- */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ============================================================
+   SPLASH OVERLAY
+   ============================================================ */
+.splash-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+.splash-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.splash-card {
+  background: #FFFFFF;
+  border-radius: 6px;
+  padding: 48px 56px;
+  max-width: 560px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.splash-card h2 {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: #2A6496;
+  margin-bottom: 24px;
+}
+
+.splash-card p {
+  font-size: 15px;
+  line-height: 1.7;
+  color: #555555;
+  margin-bottom: 16px;
+}
+
+.splash-card .splash-disclaimer {
+  font-size: 13px;
+  color: #888888;
+  margin-bottom: 32px;
+}
+
+.splash-card .splash-btn {
+  display: inline-block;
+  background: #2A6496;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 14px 40px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: inherit;
+}
+
+.splash-card .splash-btn:hover {
+  background: #1D4B73;
+}
+
+/* ============================================================
+   SCREENSHOT HERO SECTION
+   The ERPEC screenshot sits as a full-width image.
+   Our GT content overlay is positioned on top.
+   ============================================================ */
+.screenshot-hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #f0f0f0;
+  line-height: 0;
+}
+
+.screenshot-bg {
+  width: 100%;
+  display: block;
+}
+
+/* --- Ground Truth Hero Overlay ---
+   Positioned over the CENTER carousel panel of the screenshot.
+   Adjust these values (top, left, width, height) to align
+   precisely with the center panel in your screenshot.
+   Values are percentages of the screenshot image dimensions.
+   ----------------------------------------------------------- */
+.gt-hero-overlay {
+  position: absolute;
+  /* Position over center carousel panel */
+  top: 5.5%;
+  left: 33.2%;
+  width: 33.5%;
+  height: 62.5%;
+  display: block;
+  overflow: hidden;
+  text-decoration: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.gt-hero-overlay:hover {
+  text-decoration: none;
+  color: #FFFFFF;
+}
+
+/* Background image fills the overlay */
+.gt-hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.gt-hero-overlay:hover .gt-hero-image {
+  transform: scale(1.03);
+}
+
+/* Dark gradient from bottom for text readability */
+.gt-hero-gradient {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 70%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.35) 50%, rgba(0, 0, 0, 0) 100%);
+  z-index: 1;
+}
+
+/* "GROUND TRUTH" badge, top-left of the panel */
+.gt-hero-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: rgba(0, 55, 75, 0.8);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 3px;
+  z-index: 3;
+  backdrop-filter: blur(3px);
+}
+
+/* Headline + date at the bottom of the panel */
+.gt-hero-content {
+  position: absolute;
+  bottom: 28px;
+  left: 24px;
+  right: 24px;
+  z-index: 3;
+}
+
+.gt-hero-headline {
+  font-size: clamp(20px, 2.2vw, 36px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  margin-bottom: 12px;
+}
+
+.gt-hero-date {
+  display: inline-block;
+}
+
+.gt-hero-date span {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  padding-bottom: 6px;
+  border-bottom: 3px solid #3B8BBA;
+}
+
+/* ============================================================
+   GROUND TRUTH SECTION (below screenshot)
+   ============================================================ */
+.ground-truth-section {
+  padding: 40px 0 48px;
+  background: #fafbfc;
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #eeeeee;
+  line-height: 1.65;
+}
+
+.gt-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #3B8BBA;
+}
+
+.gt-section-header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1e3248;
+  letter-spacing: 0.5px;
+}
+
+.view-link {
+  font-size: 13px;
+  color: #2A6496;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.view-link:hover {
+  text-decoration: underline;
+}
+
+.gt-tagline {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  margin-top: 6px;
+}
+
+.gt-tagline p {
+  font-size: 13px;
+  color: #888888;
+  font-style: italic;
+}
+
+.gt-tagline .secu-logo {
+  height: 18px;
+  width: auto;
+  opacity: 0.55;
+}
+
+/* Ground Truth Cards */
+.gt-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.gt-card {
+  background: #FFFFFF;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+
+.gt-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px);
+}
+
+.gt-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.gt-card-image {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.gt-card-body {
+  padding: 16px;
+}
+
+.gt-card-body h3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+.gt-card:hover .gt-card-body h3 {
+  color: #2A6496;
+}
+
+.gt-card-body .gt-card-date {
+  font-size: 12px;
+  color: #999999;
+  margin-bottom: 8px;
+}
+
+.gt-card-body .gt-card-teaser {
+  font-size: 13px;
+  color: #666666;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   SCREENSHOT BOTTOM SECTION (optional)
+   Shows the rest of the ERPEC page below our GT section.
+   ============================================================ */
+.screenshot-bottom {
+  line-height: 0;
+  background: #f0f0f0;
+}
+
+.screenshot-bg-bottom {
+  width: 100%;
+  display: block;
+}
+
+/* Hide the bottom screenshot section if no image loads */
+.screenshot-bottom img[src=""] {
+  display: none;
+}
+
+/* ============================================================
+   ARTICLE PAGE STYLES
+   ============================================================ */
+
+/* Header (shared between pages) */
+.main-header {
+  background: #4a90b8;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.main-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo:hover {
+  text-decoration: none;
+}
+
+.logo-text {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 28px;
+  font-weight: 400;
+  font-style: italic;
+  color: #FFFFFF;
+  letter-spacing: -0.5px;
+}
+
+.logo-badge {
+  display: inline-block;
+  background: rgba(0, 0, 0, 0.25);
+  color: #FFFFFF;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0.5px;
+  padding: 4px 8px;
+  border-radius: 3px;
+  position: relative;
+  top: -1px;
+}
+
+/* Navigation */
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.main-nav > .nav-item {
+  position: relative;
+}
+
+.main-nav > .nav-item > a,
+.main-nav > .nav-item > button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 20px 14px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s;
+  font-family: inherit;
+}
+
+.main-nav > .nav-item > a:hover,
+.main-nav > .nav-item > button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.nav-caret {
+  font-size: 8px;
+  opacity: 0.7;
+}
+
+.nav-highlight {
+  text-transform: uppercase;
+}
+
+/* Dropdown */
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #FFFFFF;
+  border: 1px solid #e0e0e0;
+  border-top: 3px solid #2A6496;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  min-width: 240px;
+  z-index: 2000;
+  padding: 8px 0;
+}
+
+.nav-item:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 8px 20px;
+  color: #333333;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.dropdown-menu a:hover {
+  background: #f5f8fa;
+  color: #2A6496;
+  text-decoration: none;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #eeeeee;
+  margin: 6px 0;
+}
+
+/* Search field in nav */
+.nav-search-box {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.nav-search-input {
+  width: 120px;
+  padding: 6px 10px;
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px 0 0 3px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  font-family: inherit;
+  outline: none;
+}
+
+.nav-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.nav-search-btn {
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-left: none;
+  border-radius: 0 3px 3px 0;
+  color: #FFFFFF;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* --- Article page layout --- */
+.article-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  padding: 16px 0;
+  font-size: 13px;
+  color: #999999;
+  line-height: 1.65;
+}
+
+.breadcrumb a {
+  color: #2A6496;
+}
+
+.breadcrumb .separator {
+  margin: 0 8px;
+  color: #cccccc;
+}
+
+/* Article Hero Image */
+.article-hero {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.article-hero-caption {
+  font-size: 12px;
+  color: #999999;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+/* Article Header */
+.article-edition-label {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #2A6496;
+  margin-bottom: 12px;
+}
+
+.article-headline {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1e3248;
+  margin-bottom: 20px;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.author-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2A6496;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.author-info .author-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.author-info .author-title {
+  font-size: 13px;
+  color: #888888;
+}
+
+.article-date {
+  font-size: 13px;
+  color: #999999;
+  margin-left: auto;
+}
+
+/* Article Body */
+.article-body {
+  padding-bottom: 40px;
+}
+
+.article-body h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1e3248;
+  margin-top: 36px;
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.article-body p {
+  margin-bottom: 18px;
+  color: #333333;
+}
+
+.article-body .ground-truth-callout {
+  background: #f5f8fa;
+  border-left: 4px solid #3B8BBA;
+  padding: 16px 20px;
+  margin: 24px 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #333333;
+}
+
+.article-body .ground-truth-callout strong {
+  color: #2A6496;
+}
+
+/* Author Sign-off */
+.author-signoff {
+  font-size: 14px;
+  color: #666666;
+  font-style: italic;
+  padding-top: 32px;
+  margin-top: 8px;
+  border-top: 1px solid #eeeeee;
+}
+
+/* Attribution Block */
+.attribution-block {
+  background: #F5F5F5;
+  border-top: 3px solid #3B8BBA;
+  padding: 28px 32px;
+  margin: 40px 0;
+  border-radius: 0 0 4px 4px;
+}
+
+.attribution-block p {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #666666;
+  margin-bottom: 0;
+}
+
+.attribution-block .attribution-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.attribution-block .secu-logo-dark {
+  height: 22px;
+  width: auto;
+}
+
+.attribution-block .attribution-url {
+  font-size: 13px;
+  color: #2A6496;
+  font-weight: 500;
+}
+
+/* Section Header (shared) */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  padding-bottom: 10px;
+  border-bottom: 3px solid #3B8BBA;
+}
+
+.section-header h2 {
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #1e3248;
+  letter-spacing: 0.5px;
+}
+
+/* Related Editions */
+.related-editions {
+  padding: 40px 0 48px;
+}
+
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Newsletter CTA (article page) */
+.newsletter-cta {
+  background: #1e3248;
+  padding: 48px 0;
+  text-align: center;
+}
+
+.newsletter-cta h2 {
+  color: #FFFFFF;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.newsletter-cta p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  margin-bottom: 24px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-right: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  border-radius: 4px 0 0 4px;
+  outline: none;
+  font-family: inherit;
+}
+
+.newsletter-form input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.newsletter-form button {
+  padding: 12px 24px;
+  background: #3B8BBA;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.2s;
+}
+
+.newsletter-form button:hover {
+  background: #2A6496;
+}
+
+/* Footer */
+.site-footer {
+  background: #14212e;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 48px 0 0;
+  line-height: 1.65;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-col h4 {
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.footer-col a {
+  display: block;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 13px;
+  padding: 3px 0;
+}
+
+.footer-col a:hover {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .gt-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gt-hero-headline {
+    font-size: clamp(16px, 2vw, 28px);
+  }
+}
+
+@media (max-width: 768px) {
+  .gt-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .article-headline {
+    font-size: 26px;
+  }
+
+  .article-hero {
+    height: 260px;
+  }
+
+  .splash-card {
+    padding: 32px 28px;
+  }
+
+  .main-nav {
+    display: none;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form input {
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  .newsletter-form button {
+    border-radius: 4px;
+  }
+
+  .gt-hero-badge {
+    font-size: 9px;
+    padding: 3px 8px;
+    top: 8px;
+    left: 8px;
+  }
+
+  .gt-hero-content {
+    bottom: 16px;
+    left: 12px;
+    right: 12px;
+  }
+
+  .gt-hero-date span {
+    font-size: 12px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
