@@ -604,17 +604,50 @@ a:hover {
 .gt-column-banner {
   background: #466882;
   color: #FFFFFF;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 14px 24px;
+  padding: 18px 24px;
   border-radius: 8px;
   margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
 }
 
-.gt-column-banner-sep {
-  margin: 0 6px;
-  opacity: 0.5;
+.gt-column-banner-left {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.gt-column-banner-title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.gt-column-banner-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  opacity: 0.85;
+}
+
+.gt-column-banner-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.gt-column-banner-right span {
+  font-size: 11px;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+.gt-column-banner-logo {
+  height: 22px;
+  width: auto;
+  filter: brightness(0) invert(1);
 }
 
 /* Article Hero Image */
@@ -753,8 +786,9 @@ a:hover {
 
 .attribution-block .attribution-footer {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   margin-top: 16px;
 }
 
