@@ -623,6 +623,7 @@ a:hover {
 .gt-column-banner-logo-title {
   height: 64px;
   width: auto;
+  margin-left: -2px;
 }
 
 .gt-column-banner-subtitle {
